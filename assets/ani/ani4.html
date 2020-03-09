@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Mouse Animation</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Heebo|Open+Sans+Condensed:300|Quicksand|Varela+Round&display=swap');
+        body {
+            width: 100%;
+            height: 100vh;
+            background-image: #272F42;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            font-family: 'Varela Round', sans-serif;
+            align-items: center;
+        }
+        .word {
+            color: #fff;
+            font-size: 4.2rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div id="word" class="word">DONGEUN</div>
+</body>
+<script>
+    (d => {
+	const word = d.querySelector('.word');
+	
+	const shadow = e => {
+		const {x, y} = e;
+		const gBCR = word.getBoundingClientRect();
+		const w = this;
+		const moveX = (x - gBCR.left - gBCR.width/2) / gBCR.width * 5;
+		const moveY = (y - gBCR.left - gBCR.height/2) / gBCR.height * 5;
+		
+		// console.log(moveX);
+		transform(moveX, moveY);
+	}
+	
+	const transform = (x, y) => {
+		word.style.textShadow = `${x}px ${-y}px 0px rgb(102, 249, 255, 0.7),
+                             	 ${-x}px ${y}px 0px rgb(255, 35, 251, 0.7),
+                             	 ${y}px ${-x}px 0px rgb(255, 255, 73, 0.7),
+                               ${-y}px ${x}px 0px rgb(102, 249, 255, 0.7)`;	
+	}
+	
+	window.addEventListener('mousemove',shadow);
+	
+})(document);
+</script>
+</html>
